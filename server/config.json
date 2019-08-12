@@ -1,0 +1,26 @@
+{
+  "restApiRoot": "/api",
+  "host": "0.0.0.0",
+  "baseUrl": "http://localhost:3000",
+  "frontUrl": "https://jagjag.netlify.com",
+  "port": 3000,
+  "remoting": {
+    "context": false,
+    "rest": {
+      "handleErrors": false,
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "100kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "100kb"
+    },
+    "cors": false
+  },
+  "mailgunApiKey": "key-e6a3b031d2892628572d23b3d054ca89",
+  "mailgunDomain": "mg.ligabukubandung.com"
+}

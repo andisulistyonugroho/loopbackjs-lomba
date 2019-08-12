@@ -1,0 +1,11 @@
+{
+  "extends": "loopback",
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "rules": {
+    "camelcase": [2, {"properties": "never"}],
+    "comma-dangle": [2, "never"],
+    "max-len": [2, "never"]
+  }
+}

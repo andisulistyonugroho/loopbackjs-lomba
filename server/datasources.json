@@ -1,0 +1,46 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mysql": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "url": "",
+    "database": "lomba",
+    "password": "",
+    "name": "mysql",
+    "user": "root",
+    "connector": "mysql"
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "mail.sygmainnovation.com",
+        "secure": true,
+        "port": 465,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "contact@sygmainnovation.com",
+          "pass": "WSHR%D5ODdH4"
+        }
+      }
+    ]
+  },
+  "spaces": {
+    "name": "spaces",
+    "connector": "loopback-component-storage",
+    "nameConflict": "makeUnique",
+    "maxFileSize": "52428800",
+    "provider": "amazon",
+    "keyId": "WE4P5FRDKCUYBT5CHSPB",
+    "key": "VMfj6FPNx+XoelFjrwyPtD/DpMScZnodRXkOozdMT04",
+    "endpoint": "sgp1.digitaloceanspaces.com",
+    "debug": false
+  }
+}
