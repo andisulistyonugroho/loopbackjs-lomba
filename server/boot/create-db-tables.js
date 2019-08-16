@@ -2,7 +2,13 @@ const server = require('../server');
 const ds = server.dataSources.mysql;
 
 const tables = [
-  'UserProfiles'
+  'UserProfiles',
+  'event',
+  'competition',
+  'contestantType',
+  'mapCompetitionContestantType',
+  'contestant',
+  'contestantFile'
 ];
 
 if (ds.connected) {

@@ -53,5 +53,29 @@
   "space": {
     "dataSource": "spaces",
     "public": true
+  },
+  "event": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "competition": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "contestantType": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "mapCompetitionContestantType": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "contestant": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "contestantFile": {
+    "dataSource": "mysql",
+    "public": true
   }
 }

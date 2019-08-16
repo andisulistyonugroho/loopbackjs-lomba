@@ -6,7 +6,7 @@ const ds = loopback.createDataSource('memory');
 const mg = require('../../server/mailgun');
 const uniqid = require('uniqid');
 
-var senderAddress = 'tugas@sygmainnovation.com';
+var senderAddress = 'lomba@sygmainnovation.com';
 
 module.exports = function(Users) {
   // Method untuk register superadmin atau admin
@@ -88,26 +88,34 @@ module.exports = function(Users) {
         if (err) return next(err);
 
         // Set User Profile
-        const title = context.req.body.title;
-        const ava = context.req.body.ava;
+        const title = context.req.body.username;
         const userProfileData = {
           userId: user.id,
           title: title,
-          ava: ava,
+          idCardNumber: context.req.body.idCardNumber,
+          provinceId: context.req.body.provinceId,
+          cityId: context.req.body.cityId,
+          districtId: context.req.body.districtId,
+          address: context.req.body.address,
+          mobile: context.req.body.mobile,
+          WA: context.req.body.WA,
+          profession: context.req.body.profession,
+          company: context.req.body.company,
+          gender: context.req.body.gender
         };
         UserProfiles.create(userProfileData, (err, userProfile) => {
           if (err) return next(err);
             // Send Email
-          if (false) { // enable this only in production
+          if (process.env.NODE_ENV === 'local') { // enable this only in production
+            console.log('SEND EMAIL REGISTRATION TOKEN: ', user.verificationToken)
+            return next()
+          } else {
             const text = `
-              Pendaftaran anda berhasil,
-              mohon verifikasikan email anda
-              dengan cara klik link berikut ini
-              atau salin dan tempelkan ke url bar di browser anda:\n\n\t
+              Kode verifikasi pendaftaran:\n\n\t
             `;
 
             const redirectUrl = encodeURIComponent(`${app.get('baseUrl')}/verified`);
-            const link = `${app.get('baseUrl')}/api/users/confirm?uid=${user.id}&redirect=${redirectUrl}&token=${user.verificationToken}`;
+            const link = user.verificationToken;
 
             const renderData = {
               title: 'Pendaftaran Akun Berhasil!',
@@ -121,23 +129,23 @@ module.exports = function(Users) {
             const emailData = {
               from: senderAddress,
               to: user.email,
-              subject: 'Verifikasi Akun Syaamil Bundle Apps',
+              subject: 'Verifikasi Akun Lomba',
               html: htmlBody,
             };
 
             mg.messages().send(emailData, function(error, body) {
               if (error) {
-                Users.deleteById(user.id);
-                UserProfiles.deleteById(userProfile.id);
+                Users.deleteById(user.id)
+                UserProfiles.deleteById(userProfile.id)
                 return next(err);
               }
               const responseData = {
                 success: true,
                 data: user,
-              };
+              }
 
-              return context.res.json(responseData);
-            });
+              return context.res.json(responseData)
+            })
           }
         });
       });
@@ -167,5 +175,31 @@ module.exports = function(Users) {
     } else {
       cb(null, false)
     }
+  }
+
+  Users.remoteMethod('confirmRegis', {
+    accepts: [
+      { arg: 'email', type: 'string', required: true},
+      { arg: 'vtk', type: 'string', required: true}
+    ],
+    returns: { arg: 'congrats', type: 'Boolean'}
+  })
+
+  Users.confirmRegis = function(theEmail, theVtk, cb) {
+    Users.updateAll({
+      email: theEmail,
+      verificationToken: theVtk
+    }, {
+      emailVerified: 1,
+      verificationToken: null
+    }, (err, result) => {
+      if (err) return cb(err, false)
+
+      if (result.count > 0) {
+        return cb(null, true)
+      } else {
+        return cb(null, false)
+      }
+    })
   }
 };

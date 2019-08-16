@@ -21,9 +21,9 @@
       "model": "UserProfiles",
       "foreignKey": "userId"
     },
-    "products": {
+    "contestant": {
       "type": "hasMany",
-      "model": "product",
+      "model": "contestant",
       "foreignKey": "userId"
     },
     "comments": {
@@ -70,6 +70,13 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "tokenThere"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "confirmRegis"
     }
   ],
   "methods": {}
