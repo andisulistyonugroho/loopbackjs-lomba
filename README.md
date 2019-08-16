@@ -1,6 +1,8 @@
 # README
 
 ## Init
+- models for compete
+
 - generate default role
 - generate default user
 - email datasource
