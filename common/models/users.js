@@ -6,7 +6,7 @@ const ds = loopback.createDataSource('memory');
 const mg = require('../../server/mailgun');
 const uniqid = require('uniqid');
 
-var senderAddress = 'lomba@sygmainnovation.com';
+var senderAddress = 'praja2019@multiintisarana.com';
 
 module.exports = function(Users) {
   // Method untuk register superadmin atau admin
@@ -120,7 +120,7 @@ module.exports = function(Users) {
             const renderData = {
               title: 'Pendaftaran Akun Berhasil!',
               text,
-              link,
+              link
             };
 
             const renderer = loopback.template(path.resolve(__dirname, '../../server/views/verify.ejs'));
@@ -129,8 +129,8 @@ module.exports = function(Users) {
             const emailData = {
               from: senderAddress,
               to: user.email,
-              subject: 'Verifikasi Akun Lomba',
-              html: htmlBody,
+              subject: 'Verifikasi Akun Lomba PRAJA 2019',
+              html: htmlBody
             };
 
             mg.messages().send(emailData, function(error, body) {

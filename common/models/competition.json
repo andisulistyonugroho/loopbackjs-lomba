@@ -55,14 +55,10 @@
       },
       "through": "mapCompetitionContestantType"
     },
-    "user": {
+    "contestant": {
       "type": "hasMany",
-      "model": "Users",
-      "foreignKey": "userId",
-      "options": {
-        "nestRemoting": true
-      },
-      "through": "contestant"
+      "model": "contestant",
+      "foreignKey": "competitionId"
     }
   },
   "acls": [

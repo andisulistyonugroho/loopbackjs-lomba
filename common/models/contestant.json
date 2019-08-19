@@ -14,6 +14,10 @@
       "type": "number",
       "required": true
     },
+    "isSubmitted" : {
+      "type": "boolean",
+      "default": false
+    },
     "isActive": {
       "type": "boolean",
       "default": true
@@ -25,21 +29,15 @@
   },
   "validations": [],
   "relations": {
-    "user": {
+    "users": {
       "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "userId",
-      "options": {
-        "nestRemoting": true
-      }
+      "model": "Users",
+      "foreignKey": "userId"
     },
     "competition": {
       "type": "belongsTo",
       "model": "competition",
-      "foreignKey": "competitionId",
-      "options": {
-        "nestRemoting": true
-      }
+      "foreignKey": "competitionId"
     },
     "attachment": {
       "type": "hasMany",

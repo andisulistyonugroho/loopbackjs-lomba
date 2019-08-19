@@ -8,7 +8,10 @@ const tables = [
   'contestantType',
   'mapCompetitionContestantType',
   'contestant',
-  'contestantFile'
+  'contestantFile',
+  'province',
+  'city',
+  'district'
 ];
 
 if (ds.connected) {
