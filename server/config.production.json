@@ -1,0 +1,25 @@
+{
+  "restApiRoot": "/api",
+  "host": "0.0.0.0",
+  "port": 3001,
+  "remoting": {
+    "context": false,
+    "rest": {
+      "handleErrors": false,
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "100kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "100kb"
+    },
+    "cors": false
+  },
+  "mailgunApiKey": "key-e6a3b031d2892628572d23b3d054ca89",
+  "mailgunDomain": "mg.ligabukubandung.com",
+  "loopback-component-explorer": null
+}
