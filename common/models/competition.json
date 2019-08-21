@@ -15,7 +15,7 @@
       "required": true
     },
     "description": {
-      "type": "string"
+      "type": "text"
     },
     "startDate": {
       "type": "date"
@@ -26,6 +26,9 @@
     "isActive": {
       "type": "boolean",
       "default": true
+    },
+    "logo": {
+      "type": "string"
     },
     "userId": {
       "type": "number",
