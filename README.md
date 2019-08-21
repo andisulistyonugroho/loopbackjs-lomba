@@ -2,6 +2,7 @@
 
 ## Init
 
+- add logo and description
 - user can join to a competition
 - user can link the material to compete
 - user can submit their material to jury
