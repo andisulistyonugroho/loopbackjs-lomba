@@ -18,6 +18,9 @@
       "type": "boolean",
       "default": false
     },
+    "submittedAt": {
+      "type": "date"
+    },
     "isActive": {
       "type": "boolean",
       "default": true

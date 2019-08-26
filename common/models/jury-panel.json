@@ -26,9 +26,10 @@
   "validations": [],
   "relations": {
     "competition": {
-      "type": "hasMany",
+      "type": "hasOne",
       "model": "competition",
-      "foreignKey": "competitionId"
+      "foreignKey": "id",
+      "primaryKey": "competitionId"
     }
   },
   "acls": [
