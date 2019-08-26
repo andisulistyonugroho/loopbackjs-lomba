@@ -62,6 +62,15 @@
       "type": "hasMany",
       "model": "contestant",
       "foreignKey": "competitionId"
+    },
+    "jurors": {
+      "type": "hasMany",
+      "model": "Users",
+      "foreignKey": "competitionId",
+      "options": {
+        "nestRemoting": true
+      },
+      "through": "juryPanel"
     }
   },
   "acls": [

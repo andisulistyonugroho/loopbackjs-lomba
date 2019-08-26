@@ -1,22 +1,18 @@
 {
-  "name": "contestant",
+  "name": "juryPanel",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "competitionId": {
-      "type": "number",
-      "required": true
-    },
     "userId": {
       "type": "number",
       "required": true
     },
-    "isSubmitted": {
-      "type": "boolean",
-      "default": false
+    "competitionId": {
+      "type": "number",
+      "required": true
     },
     "isActive": {
       "type": "boolean",
@@ -29,20 +25,10 @@
   },
   "validations": [],
   "relations": {
-    "users": {
-      "type": "belongsTo",
-      "model": "Users",
-      "foreignKey": "userId"
-    },
     "competition": {
-      "type": "belongsTo",
+      "type": "hasMany",
       "model": "competition",
       "foreignKey": "competitionId"
-    },
-    "attachment": {
-      "type": "hasMany",
-      "model": "contestantFile",
-      "foreignKey": "contestantId"
     }
   },
   "acls": [
@@ -62,12 +48,6 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "admin",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "WRITE",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
       "permission": "ALLOW"
     },
     {

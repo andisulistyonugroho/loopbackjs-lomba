@@ -46,9 +46,28 @@
       "property": "register"
     },
     {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "superadmin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "superadmin",
+      "permission": "ALLOW",
+      "property": "registerAdmin"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
       "permission": "ALLOW",
       "property": "registerAdmin"
     },
@@ -59,9 +78,9 @@
       "permission": "ALLOW"
     },
     {
-      "accessType": "READ",
+      "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "$owner",
       "permission": "ALLOW"
     },
     {

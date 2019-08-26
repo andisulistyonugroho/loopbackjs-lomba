@@ -11,7 +11,8 @@ const tables = [
   'contestantFile',
   'province',
   'city',
-  'district'
+  'district',
+  'juryPanel'
 ];
 
 if (ds.connected) {

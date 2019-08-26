@@ -89,5 +89,9 @@
   "district": {
     "dataSource": "mysql",
     "public": true
+  },
+  "juryPanel": {
+    "dataSource": "mysql",
+    "public": true
   }
 }
