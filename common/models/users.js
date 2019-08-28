@@ -202,4 +202,53 @@ module.exports = function(Users) {
       }
     })
   }
+
+  Users.on('resetPasswordRequest', function (info) {
+    if (process.env.NODE_ENV === 'local') { // enable this only in production
+      console.log('SEND EMAIL RESET PASSWORD TOKEN: ', info.email)
+    } else {
+      const text = `
+        Seseorang meminta password anda di reset melalui form lupa password,\r\n
+        acuhkan email ini jika anda merasa tidak melakukan permintaan tersebut.\r\n
+        Kode verifikasi reset password:\n\n\t
+      `;
+      const link = info.accessToken.id;
+
+      const renderData = {
+        title: 'Reset Password Verification',
+        text,
+        link
+      };
+
+      const renderer = loopback.template(path.resolve(__dirname, '../../server/views/verify.ejs'));
+      const htmlBody = renderer(renderData);
+
+      const emailData = {
+        from: senderAddress,
+        to: info.email,
+        subject: 'Lupa Password Akun Lomba PRAJA 2019',
+        html: htmlBody
+      };
+
+      mg.messages().send(emailData, function(error, body) {
+        if (error) {
+          console.log(err);
+        }
+
+        console.log('reset password email sent to ', info.email)
+      })
+    }
+
+  })
+
+  // After change user's password via a password-reset token.
+  Users.afterRemote('setPassword', function(context, user, next) {
+    const userId = context.args.options.accessToken.userId
+    const ATModel = app.models.AccessToken
+    ATModel.destroyAll({userId: userId}, (err, info) => {
+      if (err) next(err)
+
+      next()
+    })
+  })
 };
