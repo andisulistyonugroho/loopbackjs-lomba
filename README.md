@@ -2,6 +2,8 @@
 
 ## Init
 
+- forgetpassword
+
 - model jury
 - acl users and user profile
 
