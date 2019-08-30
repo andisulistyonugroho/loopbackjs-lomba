@@ -47,6 +47,12 @@
     },
     "ava": {
       "type": "string"
+    },
+    "npwp": {
+      "type": "string"
+    },
+    "postcode": {
+      "type": "string"
     }
   },
   "validations": [],
