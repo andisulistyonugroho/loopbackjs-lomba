@@ -12,7 +12,10 @@ const tables = [
   'province',
   'city',
   'district',
-  'juryPanel'
+  'juryPanel',
+  'competitionScoreCriteria',
+  'contestantScore',
+  'contestantScoreItem'
 ];
 
 if (ds.connected) {

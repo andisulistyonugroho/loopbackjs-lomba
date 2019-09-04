@@ -101,5 +101,17 @@
   "RoleMappings": {
     "dataSource": "mysql",
     "public": false
+  },
+  "competitionScoreCriteria": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "contestantScore": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "contestantScoreItem": {
+    "dataSource": "mysql",
+    "public": true
   }
 }

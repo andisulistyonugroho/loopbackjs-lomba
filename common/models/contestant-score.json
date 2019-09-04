@@ -1,58 +1,41 @@
 {
-  "name": "contestant",
+  "name": "contestantScore",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "competitionId": {
+    "contestantId": {
       "type": "number",
       "required": true
     },
-    "userId": {
+    "totalScore": {
+      "type": "number",
+      "default": 0
+    },
+    "juryPanelId": {
       "type": "number",
       "required": true
-    },
-    "isSubmitted": {
-      "type": "boolean",
-      "default": false
-    },
-    "submittedAt": {
-      "type": "date"
     },
     "isActive": {
       "type": "boolean",
       "default": true
     },
+    "isFinal": {
+      "type": "boolean",
+      "default": false
+    },
     "createdAt": {
       "type": "date",
       "defaultFn": "now"
+    },
+    "deactivatedAt": {
+      "type": "date"
     }
   },
   "validations": [],
-  "relations": {
-    "users": {
-      "type": "belongsTo",
-      "model": "Users",
-      "foreignKey": "userId"
-    },
-    "competition": {
-      "type": "belongsTo",
-      "model": "competition",
-      "foreignKey": "competitionId"
-    },
-    "attachment": {
-      "type": "hasMany",
-      "model": "contestantFile",
-      "foreignKey": "contestantId"
-    },
-    "contestantScore": {
-      "type": "hasMany",
-      "model": "contestantScore",
-      "foreignKey": "contestantId"
-    }
-  },
+  "relations": {},
   "acls": [
     {
       "accessType": "*",
@@ -73,15 +56,15 @@
       "permission": "ALLOW"
     },
     {
-      "accessType": "WRITE",
+      "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "jury",
       "permission": "ALLOW"
     },
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "member",
       "permission": "ALLOW"
     }
   ],

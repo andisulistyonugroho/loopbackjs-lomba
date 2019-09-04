@@ -73,6 +73,11 @@
         "nestRemoting": true
       },
       "through": "juryPanel"
+    },
+    "competitionScoreCriteria": {
+      "type": "hasMany",
+      "model": "competitionScoreCriteria",
+      "foreignKey": "competitionId"
     }
   },
   "acls": [
@@ -105,6 +110,20 @@
       "principalType": "ROLE",
       "principalId": "member",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "jury",
+      "permission": "ALLOW",
+      "property": "unScoredUser"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "jury",
+      "permission": "ALLOW",
+      "property": "unScoredUserCount"
     }
   ],
   "methods": {}

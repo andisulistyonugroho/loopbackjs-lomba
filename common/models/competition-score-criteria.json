@@ -1,5 +1,5 @@
 {
-  "name": "contestant",
+  "name": "competitionScoreCriteria",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -10,16 +10,13 @@
       "type": "number",
       "required": true
     },
-    "userId": {
-      "type": "number",
+    "title": {
+      "type": "string",
       "required": true
     },
-    "isSubmitted": {
-      "type": "boolean",
-      "default": false
-    },
-    "submittedAt": {
-      "type": "date"
+    "score": {
+      "type": "number",
+      "default": 0
     },
     "isActive": {
       "type": "boolean",
@@ -32,25 +29,10 @@
   },
   "validations": [],
   "relations": {
-    "users": {
-      "type": "belongsTo",
-      "model": "Users",
-      "foreignKey": "userId"
-    },
-    "competition": {
-      "type": "belongsTo",
-      "model": "competition",
-      "foreignKey": "competitionId"
-    },
-    "attachment": {
+    "contestantScoreItem": {
       "type": "hasMany",
-      "model": "contestantFile",
-      "foreignKey": "contestantId"
-    },
-    "contestantScore": {
-      "type": "hasMany",
-      "model": "contestantScore",
-      "foreignKey": "contestantId"
+      "model": "contestantScoreItem",
+      "foreignKey": "competitionScoreCriteriaId"
     }
   },
   "acls": [
@@ -73,15 +55,15 @@
       "permission": "ALLOW"
     },
     {
-      "accessType": "WRITE",
+      "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "jury",
       "permission": "ALLOW"
     },
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "member",
       "permission": "ALLOW"
     }
   ],
