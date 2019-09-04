@@ -2,6 +2,12 @@
 
 ## Init
 
+- admin can see list of contestant
+- admin can see contestant detail
+- contestant can upload their idcard photo
+- jury can see list of contestant (scored, unscored)
+- jury can give score to contestant
+
 - forgetpassword
 
 - model jury
