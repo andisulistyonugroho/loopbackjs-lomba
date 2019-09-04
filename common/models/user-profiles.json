@@ -53,6 +53,9 @@
     },
     "postcode": {
       "type": "string"
+    },
+    "idCardLocation": {
+      "type": "string"
     }
   },
   "validations": [],
