@@ -1,0 +1,27 @@
+{
+  "name": "RoleMappings",
+  "base": "RoleMapping",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mysql": {
+      "table": "RoleMapping"
+    }
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "role": {
+      "type": "belongsTo",
+      "model": "Roles",
+      "foreignKey": "roleId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "Users",
+      "foreignKey": "principalId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -15,7 +15,8 @@
       "required": true
     },
     "description": {
-      "type": "text"
+      "type": "string",
+      "dataType": "TEXT"
     },
     "startDate": {
       "type": "date"
@@ -67,6 +68,7 @@
       "type": "hasMany",
       "model": "Users",
       "foreignKey": "competitionId",
+      "keyThrough": "userId",
       "options": {
         "nestRemoting": true
       },

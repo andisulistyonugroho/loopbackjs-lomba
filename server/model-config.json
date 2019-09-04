@@ -93,5 +93,13 @@
   "juryPanel": {
     "dataSource": "mysql",
     "public": true
+  },
+  "Roles": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "RoleMappings": {
+    "dataSource": "mysql",
+    "public": false
   }
 }
