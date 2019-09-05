@@ -2,6 +2,8 @@
 
 ## Init
 
+- admin can add new jury
+
 - admin can see list of contestant
 - admin can see contestant detail
 - contestant can upload their idcard photo
