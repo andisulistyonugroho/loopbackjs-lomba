@@ -5,6 +5,7 @@ const app = require('../../server/server');
 const ds = loopback.createDataSource('memory');
 const mg = require('../../server/mailgun');
 const uniqid = require('uniqid');
+const mysql = app.dataSources.mysql;
 
 var senderAddress = 'praja2019@multiintisarana.com';
 
@@ -251,4 +252,66 @@ module.exports = function(Users) {
       next()
     })
   })
+
+  /**
+   * Fungsi ini digunakan untuk registrasi juri
+  */
+  Users.registerJury = async function ({ fullName, ...userPayload }) {
+    try {
+      let result = {};
+      await mysql.transaction(async models => {
+        const {
+          Users: UserModel,
+          UserProfiles: UPModel,
+          RoleMappings: RMModel
+        } = models;
+        const roleID = 3;
+
+        /** 
+         * Create data user terelebih dahulu 
+         * Set emailVerified = true
+        */
+        userPayload = { ...userPayload, realm: 'jury', emailVerified: true };
+        const insertedUser = await UserModel.create(userPayload);
+
+        /** 
+         * Create data user profile
+         * Data yang di insert hanya fullName nya saja
+        */
+        const userProfilePayload = {
+          userId: insertedUser.id,
+          title: fullName
+        }
+        const insertedProfile = await UPModel.create(userProfilePayload);
+
+        /**
+         * Setup RoleMapping
+        */
+        const roleMapPayload = {
+          principalType: 'USER',
+          principalId: insertedUser.id,
+          roleId: roleID
+        }
+        await RMModel.create(roleMapPayload);
+
+        result = {
+          ...insertedUser.toJSON(),
+          userProfile: insertedProfile
+        }
+      });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+  Users.remoteMethod('registerJury', {
+    accepts: {
+      arg: 'data',
+      type: 'registerJuryPayload', // Cek di project dir : ./server/models/register-jury-payload.json
+      description: 'rolename nya adalah "jury"',
+      http: {source: 'body'},
+    },
+    returns: {arg: 'result', type: 'object', root: true},
+    description: 'API ini untuk registasi jury',
+  });
 };

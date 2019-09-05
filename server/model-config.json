@@ -113,5 +113,9 @@
   "contestantScoreItem": {
     "dataSource": "mysql",
     "public": true
+  },
+  "registerJuryPayload": {
+    "dataSource": null,
+    "public": false
   }
 }
