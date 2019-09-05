@@ -2,6 +2,8 @@
 
 ## Init
 
+- jury can add comment on contestant
+- jury can see 20 top scorer
 - admin can add new jury
 
 - admin can see list of contestant
