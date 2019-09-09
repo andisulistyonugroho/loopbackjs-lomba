@@ -39,7 +39,16 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "jury": {
+      "type": "belongsTo",
+      "model": "juryPanel",
+      "foreignKey": "juryPanelId",
+      "options": {
+        "nestRemoting": false
+      }
+    }
+  },
   "acls": [
     {
       "accessType": "*",
