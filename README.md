@@ -2,6 +2,9 @@
 
 ## Init
 
+- admin can see pleno menu
+- admin can see top 20 contestant
+
 - jury can add comment on contestant
 - jury can see 20 top scorer
 - admin can add new jury
