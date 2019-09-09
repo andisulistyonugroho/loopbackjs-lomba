@@ -70,7 +70,7 @@ module.exports = function(Competition) {
         arg: 'competitionId',
         type: 'number',
         description: 'competition ID',
-        required: true,
+        required: true
       },
       {
         arg: 'jurorId',
@@ -107,6 +107,46 @@ module.exports = function(Competition) {
         })
       } else {
         return cb(null, 0)
+      }
+    })
+  }
+
+  // Run native to get top 20 of all jury
+  Competition.remoteMethod('pleno', {
+    accepts: [
+      {
+        arg: 'competitionId',
+        type: 'number',
+        description: 'competition ID',
+        required: true
+      }
+    ],
+    returns: {arg: 'data', type: 'object', root: true},
+    description: 'API for pleno'
+  })
+
+  Competition.pleno = function (competitionId, cb) {
+    const juryPanelModel = Competition.app.models.juryPanel
+    juryPanelModel.count({competitionId: competitionId}, (err, count) => {
+      if (err) return cb(err, null)
+
+      if (count > 0) {
+
+        const sql = `SELECT a.totalScore, ${count} AS hit, SUM(a.totalScore/${count}) AS grandScore,
+          a.contestantId
+          FROM contestantScore a WHERE
+          EXISTS (SELECT 1 FROM contestant b WHERE b.isSubmitted = 1
+          AND a.contestantId = b.id AND b.competitionId = ${competitionId})
+          GROUP BY a.contestantId
+          ORDER BY totalScore DESC LIMIT 20`
+        const mySQL = Competition.app.datasources.mysql.connector
+        mySQL.execute(sql, null, (err, data) => {
+          if (err) return cb(err, null)
+
+          return cb(null, data)
+        })
+      } else {
+        return cb(null, null)
       }
     })
   }

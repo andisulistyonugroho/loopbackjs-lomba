@@ -124,6 +124,20 @@
       "principalId": "jury",
       "permission": "ALLOW",
       "property": "unScoredUserCount"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "pleno"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superadmin",
+      "permission": "ALLOW",
+      "property": "pleno"
     }
   ],
   "methods": {}
