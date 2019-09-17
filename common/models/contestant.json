@@ -18,6 +18,10 @@
       "type": "boolean",
       "default": false
     },
+    "isVerified": {
+      "type": "boolean",
+      "default": false
+    },
     "submittedAt": {
       "type": "date"
     },
