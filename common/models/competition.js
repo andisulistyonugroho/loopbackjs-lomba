@@ -46,6 +46,7 @@ module.exports = function(Competition) {
         const juryPanelId = result.id
         const mySQL = Competition.app.datasources.mysql.connector
         const sql = `SELECT a.* FROM contestant a WHERE a.isSubmitted = 1
+          AND a.isVerified = 1
           AND a.competitionId = ${competitionId}
           AND NOT EXISTS (SELECT 1 FROM contestantScore b WHERE
           b.contestantId = a.id AND b.juryPanelId = ${juryPanelId})
@@ -95,6 +96,7 @@ module.exports = function(Competition) {
         const juryPanelId = result.id
         const mySQL = Competition.app.datasources.mysql.connector
         const sql = `SELECT COUNT(1) AS count FROM contestant a WHERE a.isSubmitted = 1
+          AND a.isVerified = 1
           AND a.competitionId = ${competitionId}
           AND NOT EXISTS (SELECT 1 FROM contestantScore b WHERE
           b.contestantId = a.id AND b.juryPanelId = ${juryPanelId})
@@ -136,6 +138,7 @@ module.exports = function(Competition) {
           a.contestantId
           FROM contestantScore a WHERE
           EXISTS (SELECT 1 FROM contestant b WHERE b.isSubmitted = 1
+          AND b.isVerified = 1
           AND a.contestantId = b.id AND b.competitionId = ${competitionId})
           GROUP BY a.contestantId
           ORDER BY totalScore DESC LIMIT 20`
