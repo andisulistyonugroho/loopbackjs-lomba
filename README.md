@@ -2,6 +2,9 @@
 
 ## Init
 
+- admin can create new contestant
+- admin can register the new contestant to a competition and upload a file to submit
+
 - admin can mark contestant that pass the document review
 - jurors only see contestant that passed the admin review
 - contestant can withdraw from a competition if he/she hasn't submit the file to be assessed
