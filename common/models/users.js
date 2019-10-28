@@ -314,4 +314,87 @@ module.exports = function(Users) {
     returns: {arg: 'result', type: 'object', root: true},
     description: 'API ini untuk registasi jury',
   });
+
+  Users.directRegisterContestant = async function (payload) {
+    let newUserId;
+    await mysql.transaction(async (models) => {
+      const {
+        Users: UserModel,
+        UserProfiles: UPModel,
+        RoleMappings: RMModel,
+        Roles: RoleModel,
+        contestant: ContestantModel,
+        contestantFile: CFModel
+      } = models;
+
+      const { user, profile, contestants } = payload;
+
+      /**
+       *  1) Create User Terlebih Dahulu 
+       *  `realm` diset jadi `member`
+       *  `isVerified` di set jadi `true`
+       *  `verificationToken` diset jadi `null`
+       *  `role` nya di set jadi `member`
+      */
+      const userPayload = { realm: 'member', emailVerified: true, verificationToken: null, ...user };
+      const newUser = await UserModel.create(userPayload);
+      newUserId = newUser.id;
+
+      const role = await RoleModel.findOne({ name: 'member' });
+      await RMModel.create({
+        principalType: RMModel.USER,
+        principalId: newUser.id,
+        roleId: role.id
+      });
+
+      /**
+       *  2) Create User Profile 
+       *  Asumsi bahwa file sudah di upload sebelumnya di frontend, sebelum memanggil Fungsi ini
+      */
+      const profilePayload = { userId: newUser.id, ...profile };
+      await UPModel.create(profilePayload);
+
+      /**
+       *  3) Create Contestant data & It's file
+       *  set `isSubmitted` jadi `true`
+       *  set `submittedAt` jadi tanggal sekarang
+       *  set `isVerified` jadi `false`
+      */
+      for (let c of contestants) {
+        const contestantPayload = {
+          userId: newUser.id,
+          competitionId: c.competitionId,
+          isSubmitted: true,
+          submittedAt: Date.now(),
+          isVerified: false
+        };
+        const newContestant = await ContestantModel.create(contestantPayload);
+
+        for (let f of c.files) {
+          const filePayload = {
+            contestantId: newContestant.id,
+            name: f.linkName,
+            location: f.linkURL,
+            isExternalLink: true,
+            isActive: true
+          };
+          await CFModel.create(filePayload);
+        }
+      }
+    });
+
+    const userRes = await Users.findById(newUserId);
+    return userRes;
+  }
+
+  Users.remoteMethod('directRegisterContestant', {
+    accepts: {
+      arg: 'data',
+      type: 'object',
+      // description: 'rolename nya adalah "jury"',
+      http: {source: 'body'},
+    },
+    returns: {arg: 'result', type: 'object', root: true},
+    description: 'API ini untuk registrasi kontestan secara langsung oleh admin',
+  });
 };
