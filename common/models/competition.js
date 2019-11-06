@@ -141,7 +141,7 @@ module.exports = function(Competition) {
           AND b.isVerified = 1
           AND a.contestantId = b.id AND b.competitionId = ${competitionId})
           GROUP BY a.contestantId
-          ORDER BY totalScore DESC LIMIT 20`
+          ORDER BY grandScore DESC LIMIT 20`
         const mySQL = Competition.app.datasources.mysql.connector
         mySQL.execute(sql, null, (err, data) => {
           if (err) return cb(err, null)
