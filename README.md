@@ -8,6 +8,10 @@
 - setup nodejs environment, "export NODE_ENV=production", ref: https://riptutorial.com/node-js/example/10101/setting-node-env--production-
 - install npm package, "npm install"
 - run application, node server/server.js
+- open this address from browser ip_address:3000
+
+## NGINX as PROXY
+- https://www.tecmint.com/nginx-as-reverse-proxy-for-nodejs-app/
 
 
 ## Init
