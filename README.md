@@ -5,7 +5,8 @@
 - create new database named "lomba"
 - go to the product folder, "cd ~/loopback-lomba"
 - configuration file in server folder, "vim ~/loopback-lomba/server/datasource.production.json"
-- setup nodejs environment, "export NODE_ENV=production", ref: https://riptutorial.com/node-js/example/10101/setting-node-env--production-
+- change mysql host, db name, and password as your database setting.
+- setup nodejs environment, "export NODE_ENV=production",reference: https://riptutorial.com/node-js/example/10101/setting-node-env--production-
 - install npm package, "npm install"
 - run application, node server/server.js
 - open this address from browser ip_address:3000
