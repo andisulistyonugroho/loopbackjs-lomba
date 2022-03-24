@@ -26,8 +26,8 @@
           "rejectUnauthorized": false
         },
         "auth": {
-          "user": "contact@sygmainnovation.com",
-          "pass": "WSHR%D5ODdH4"
+          "user": "",
+          "pass": ""
         }
       }
     ]
@@ -38,9 +38,9 @@
     "nameConflict": "makeUnique",
     "maxFileSize": "52428800",
     "provider": "amazon",
-    "keyId": "WE4P5FRDKCUYBT5CHSPB",
-    "key": "VMfj6FPNx+XoelFjrwyPtD/DpMScZnodRXkOozdMT04",
-    "endpoint": "sgp1.digitaloceanspaces.com",
+    "keyId": "",
+    "key": "",
+    "endpoint": "",
     "debug": false
   }
 }
