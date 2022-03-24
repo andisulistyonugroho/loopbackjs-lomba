@@ -19,7 +19,7 @@
     },
     "cors": false
   },
-  "mailgunApiKey": "key-e6a3b031d2892628572d23b3d054ca89",
-  "mailgunDomain": "mg.ligabukubandung.com",
+  "mailgunApiKey": "",
+  "mailgunDomain": "",
   "loopback-component-explorer": null
 }
